@@ -3,12 +3,25 @@ import random
 import time
 import telebot
 from telebot import types
+from flask import Flask
+from threading import Thread
 
 TOKEN = "8849316294:AAFe1CaQwY3EmdpCDG9_dDQGg5eiWT746To"
 ADMIN_ID = 8390198126
 CARD_NUMBER = "2204 3206 5735 0775"
 
 bot = telebot.TeleBot(TOKEN)
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return "Бот работает"
+
+def run_flask():
+    app.run(host='0.0.0.0', port=10000)
+
+Thread(target=run_flask).start()
 
 products = []
 orders = {}
